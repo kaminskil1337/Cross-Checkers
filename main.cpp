@@ -1,9 +1,20 @@
+//CODE::BLOCKS 17.12 GNU GCC COMPILER
+
 #include <iostream>
 #include <iomanip>
 #include <windows.h>
 
-
 using namespace std;
+
+void czyszczenieKonsoli()
+{
+    system("cls");
+}
+
+void czekajNaEnter()
+{
+    system("pause");
+}
 
 void rysujPlansze(char tab[17][17], int gracz)
 {
@@ -60,7 +71,7 @@ void nazwanieGraczy(string &jeden, string &dwa)
     cout << endl;
 }
 
-void rysujNaglowek()
+void rysujNaglowek() //function that draw headline
 {
     cout << " W A R C A B Y   K R Z Y Z O W E" << endl;
     cout << setw(32) << "by: Lukasz Kaminski" << endl << endl;
@@ -89,7 +100,7 @@ void rysujPomoc()
     cout << "  >wybranie kierunku, przez wpisanie odpowiadajacej mu litery [NW, N, NE, W, E, SW, S, SE]" << endl;
     cout << "  >roza wiatrow znajduje sie po prawej stronie planszy" << endl;
     cout << endl;
-    cout << "nacisnij dowolny klawisz, aby zamknac" << endl << endl;
+    cout << "nacisnij ENTER, aby zamknac" << endl << endl;
 }
 
 void podstawoweMenu(bool &koniec)
@@ -99,7 +110,7 @@ void podstawoweMenu(bool &koniec)
     cout << "  M E N U" << endl << "  1. graj" << endl << "  2. pomoc" << endl << "  3. wylacz" << endl << endl;
     cout << " twoj wybor: ";
     cin >> wybor;
-    system("cls");
+    czyszczenieKonsoli();
     switch(wybor)
     {
         case '1':
@@ -110,8 +121,8 @@ void podstawoweMenu(bool &koniec)
         {
             rysujNaglowek();
             rysujPomoc();
-            system("pause");
-            system("cls");
+            czekajNaEnter();
+            czyszczenieKonsoli();
             podstawoweMenu(koniec);
 
             break;
@@ -129,9 +140,40 @@ void podstawoweMenu(bool &koniec)
     }
 }
 
-void gdzieMoznaRuszyc(char tab[17][17], int tab2[3][3], int w, int k, int gracz)
+void pokazKtoRusza(int gracz, string g1, string g2)
 {
-    char prz, grcz; //pionek przeciwnika
+    czyszczenieKonsoli();
+    rysujNaglowek();
+    cout << endl<< endl<< endl<< endl<< endl;
+    cout << "      " << setw(14) << "Ruch wykonuje:" << endl;
+    if(gracz == 1)
+    {
+        cout << "      " << setw(14)<< g1 << endl;
+    }
+    else
+    {
+        cout << "      " << setw(14)<< g2 << endl;
+    }
+    cout << endl<< endl<< endl<< endl<< endl<< endl<< endl<< endl;
+    czekajNaEnter();
+}
+
+void zerowanie(int tab[3][3]) //zerowanie pol malej tablicy
+{
+    for(int i=0;i<3;i++)
+    {
+        for(int j =0;j<3;j++)
+        {
+            tab[i][j] = 0;
+
+        }
+    }
+}
+
+void gdzieMoznaRuszyc(char tab[17][17], int tab2[3][3], int w, int k, int gracz) //dla danego pola sprawdza mo¿liwoœci ruchu dooko³a niego 0-nie ma ruchu, 1-ruch, 2-bicie, dlugi ruch
+{
+    char prz; //pionek przeciwnika
+    char grcz; //pionek aktualnego gracza
     if(gracz == 1 )
     {
       grcz = 'x';
@@ -169,6 +211,11 @@ void gdzieMoznaRuszyc(char tab[17][17], int tab2[3][3], int w, int k, int gracz)
             {
                  tab2[0][1] = 3;
             }
+            if((tab[w-2][k]=='|') && (tab[w-3][k]='|') && (tab[w-4][k]==prz) && (tab[w-2][k]=='|') && (tab[w-3][k]='|') && (tab[w-4][k]==' '))
+            {
+                 tab2[0][1] = 3;
+            }
+
         }
         if(tab[w-1][k+1]=='/') //NE
         {
@@ -251,181 +298,7 @@ void gdzieMoznaRuszyc(char tab[17][17], int tab2[3][3], int w, int k, int gracz)
     }
 }
 
-bool czyMozliwyRuch(int tab[3][3])
-{
-    int mozliweRuchy = 0;
-    for(int i=0;i<3;i++)
-    {
-        for(int j =0;j<3;j++)
-        {
-            if(tab[i][j] != 0)
-            {
-                mozliweRuchy += 1;
-            }
-        }
-    }
-    if(mozliweRuchy != 0) return true;
-    else return false;
-
-}
-
-void literkaNaCyferke(char clit, int &lit)
-{
-    if(clit=='I') lit = 0;
-    if(clit=='H') lit = 1;
-    if(clit=='G') lit = 2;
-    if(clit=='F') lit = 3;
-    if(clit=='E') lit = 4;
-    if(clit=='D') lit = 5;
-    if(clit=='C') lit = 6;
-    if(clit=='B') lit = 7;
-    if(clit=='A') lit = 8;
-}
-
-char CyferkaNaLiterke(int lit)
-{
-    if (lit == 0) return 'I';
-    if (lit == 1) return 'H';
-    if (lit == 2) return 'G';
-    if (lit == 3) return 'F';
-    if (lit == 4) return 'E';
-    if (lit == 5) return 'D';
-    if (lit == 6) return 'C';
-    if (lit == 7) return 'B';
-    if (lit == 8) return 'A';
-}
-
-void wyborNaIndeks(int lit, int cyf, int &w, int &k)
-{
-    w = lit*2;
-    k = (cyf-1)*2;
-}
-
-void pokazKtoRusza(int gracz, string g1, string g2)
-{
-    system("cls");
-    rysujNaglowek();
-    cout << endl<< endl<< endl<< endl<< endl;
-    cout << "      " << setw(14) << "Ruch wykonuje:" << endl;
-    if(gracz == 1)
-    {
-        cout << "      " << setw(14)<< g1 << endl;
-    }
-    else
-    {
-        cout << "      " << setw(14)<< g2 << endl;
-    }
-    cout << endl<< endl<< endl<< endl<< endl<< endl<< endl<< endl;
-    system("pause");
-}
-
-void podanieWartosci(char &cliterka, int &cyferka)
-{
-    cout << "literka: ";
-    cin >> cliterka;
-    cliterka = toupper(cliterka);
-    cout << "cyferka: ";
-    cin >> cyferka;
-}
-
-void wyborPionka(int &w, int &k)
-{
-    char clit;
-    int lit,cyf;
-    podanieWartosci(clit, cyf);
-    literkaNaCyferke(clit,lit);
-    wyborNaIndeks(lit,cyf,w,k);
-}
-
-bool poprawneDane(char tab[17][17], int w, int k, int gracz)
-{
-    if(((gracz == 1) && (tab[w][k] == 'x'))||((gracz == -1) &&(tab[w][k] == 'o')))
-    {
-        return 1;
-    }
-    else
-    {
-        return 0;
-    }
-}
-
-void zerowanie(int tab[3][3])
-{
-    for(int i=0;i<3;i++)
-    {
-        for(int j =0;j<3;j++)
-        {
-            tab[i][j] = 0;
-
-        }
-    }
-}
-
-void wybraniePionka(char tab[17][17], int tab2[3][3], int gracz, int &tabw, int &tabk)
-{
-    bool poprawne, jestRuch;
-    while(1)     //wybor i sprawdzanie poprawnosci wyboru
-    {
-        system("cls");
-        rysujNaglowek();
-        rysujPlansze(tab,gracz);
-        zerowanie(tab2);
-        cout << endl << "wybierz pionek V" << endl;
-        wyborPionka(tabw, tabk);                            //wybieramy pionek, otrzymujemy tabw i tabk
-        poprawne = poprawneDane(tab, tabw,tabk,gracz);              //sprawdzamy czy wybrano odpowiedni pionek dla konkretnego gracza
-        gdzieMoznaRuszyc(tab,tab2,tabw,tabk, gracz);        //tutaj wiemy w jakich kierunkach jakie sa mozliwosci
-        jestRuch = czyMozliwyRuch(tab2);
-        if(poprawne)
-        {
-            if(jestRuch)
-            {
-                break;       //poprawne dane i jest ruch
-            }
-            else
-            {
-                cout <<endl<< "wybrany pionek nie moze sie ruszyc" << endl;
-                system("pause");
-            }
-        }
-        else
-        {
-            cout<<endl<< "zle dane, podaj ponownie: " << endl;
-            system("pause");
-        }
-    }
-}
-
-void menuPionek(char plansza[17][17], int tab2[3][3], int gracz,int tabw, int tabk)
-{
-    system("cls");
-    rysujNaglowek();
-    char wybor;
-    rysujPlansze(plansza,gracz);
-    cout << "  M E N U" << endl << "  1. wybierz gdzie chcesz ruszyc" << endl << "  2. wybierz inny pionek" << endl << endl;
-    cout << " twoj wybor: ";
-    cin >> wybor;
-    system("cls");
-    switch(wybor)
-    {
-        case '1':
-        {
-            break;
-        }
-        case '2':
-        {
-            wybraniePionka(plansza,tab2, gracz, tabw, tabk);
-            menuPionek(plansza,tab2,gracz, tabw, tabk);
-            break;
-        }
-        default:
-        {
-            cout << "zly wybor, wybierz ponownie" << endl;
-            menuPionek(plansza, tab2, gracz, tabw, tabk);
-        }
-    }
-}
-
-string tabNaKiedunek(int tab[3][3])
+string tabNaKiedunek(int tab[3][3]) //zwraca kierunek, w ktorym mozliwe jest bicice
 {
     for(int i = 0;i<3;i++)
     {
@@ -446,7 +319,19 @@ string tabNaKiedunek(int tab[3][3])
     }
 }
 
-void bicie(char tab[17][17], int w, int k, string kier)
+char CyferkaNaLiterke(int lit) //zamienia cyfre na litere, ktora jest uzywana do oznaczenia pola na planszy
+{
+    if (lit == 0) return 'I';
+    if (lit == 1) return 'H';
+    if (lit == 2) return 'G';
+    if (lit == 3) return 'F';
+    if (lit == 4) return 'E';
+    if (lit == 5) return 'D';
+    if (lit == 6) return 'C';
+    if (lit == 7) return 'B';
+    if (lit == 8) return 'A';
+}
+void bicie(char tab[17][17], int w, int k, string kier) // wykonanie bicia w danym kierunku
 {
     if(kier=="NW")
     {
@@ -498,7 +383,7 @@ void bicie(char tab[17][17], int w, int k, string kier)
     }
 }
 
-void czyMozliweBicie(char tab[17][17],int tab2[3][3], int gracz, bool &zbito)
+void czyMozliweBicie(char tab[17][17],int tab2[3][3], int gracz, bool &zbito) //sprawdza czy mozliwe bicie, jesli tak to je wykonuje
 {
     int bicieW, bicieK;
     bool czyBicie=false;
@@ -512,7 +397,7 @@ void czyMozliweBicie(char tab[17][17],int tab2[3][3], int gracz, bool &zbito)
                 {
                     for(int y=0;y<3;y++)
                     {
-                        if(tab2[k][y]==2)
+                        if(tab2[k][y]==2) //czy mozliwe bicie
                         {
                             czyBicie=true;
                             bicieW = i;
@@ -526,10 +411,10 @@ void czyMozliweBicie(char tab[17][17],int tab2[3][3], int gracz, bool &zbito)
                 }
             }
         }
-    if(czyBicie)
+    if(czyBicie) //wykonanie bicia
     {
         string kierunek = tabNaKiedunek(tab2);
-        system("cls");
+        czyszczenieKonsoli();
         rysujNaglowek();
         rysujPlansze(tab,gracz);
         cout << setw(14) << "Mozliwe bicie:" << endl;
@@ -538,12 +423,143 @@ void czyMozliweBicie(char tab[17][17],int tab2[3][3], int gracz, bool &zbito)
         cout << "Nacisnij ENTER, aby wykonac" << endl;
         bicie(tab,bicieW,bicieK,kierunek);
         zbito = true;
-        system("pause");
+        czekajNaEnter();
         zerowanie(tab2);
     }
 }
 
-bool czyDobryKierunek(int tab[3][3], string kierunek)
+void podanieWartosci(char &cliterka, int &cyferka) //zwraca literke i cyferke
+{
+    cout << "literka: ";
+    cin >> cliterka;
+    cliterka = toupper(cliterka);
+    cout << "cyferka: ";
+    cin >> cyferka;
+}
+
+void literkaNaCyferke(char clit, int &lit) //zamiana literki cyferke
+{
+    if(clit=='I') lit = 0;
+    if(clit=='H') lit = 1;
+    if(clit=='G') lit = 2;
+    if(clit=='F') lit = 3;
+    if(clit=='E') lit = 4;
+    if(clit=='D') lit = 5;
+    if(clit=='C') lit = 6;
+    if(clit=='B') lit = 7;
+    if(clit=='A') lit = 8;
+}
+
+void wyborNaIndeks(int lit, int cyf, int &w, int &k) //zamienia podane wartosci na indeksy tabeli
+{
+    w = lit*2;
+    k = (cyf-1)*2;
+}
+
+void wyborPionka(int &w, int &k) //wybranie pionka za pomoca literki i cyferki, zwraca indeksy planszy
+{
+    char clit;
+    int lit,cyf;
+    podanieWartosci(clit, cyf);
+    literkaNaCyferke(clit,lit);
+    wyborNaIndeks(lit,cyf,w,k);
+}
+
+bool poprawneDane(char tab[17][17], int w, int k, int gracz) //sprawdzanie czy gracz wybral swoj pionek, a nie jakies inne pole na planszy
+{
+    if(((gracz == 1) && (tab[w][k] == 'x'))||((gracz == -1) &&(tab[w][k] == 'o')))
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+bool czyMozliwyRuch(int tab[3][3])
+{
+    int mozliweRuchy = 0;
+    for(int i=0;i<3;i++)
+    {
+        for(int j =0;j<3;j++)
+        {
+            if(tab[i][j] != 0)
+            {
+                mozliweRuchy += 1;
+            }
+        }
+    }
+    if(mozliweRuchy != 0) return true;
+    else return false;
+
+}
+
+void wybraniePionka(char tab[17][17], int tab2[3][3], int gracz, int &tabw, int &tabk)
+{
+    bool poprawne, jestRuch;
+    while(1)     //wybor i sprawdzanie poprawnosci wyboru
+    {
+        czyszczenieKonsoli();
+        rysujNaglowek();
+        rysujPlansze(tab,gracz);
+        zerowanie(tab2);
+        cout << endl << "wybierz pionek V" << endl;
+        wyborPionka(tabw, tabk);                            //wybieramy pionek, otrzymujemy tabw i tabk
+        poprawne = poprawneDane(tab, tabw,tabk,gracz);              //sprawdzamy czy wybrano odpowiedni pionek dla konkretnego gracza
+        gdzieMoznaRuszyc(tab,tab2,tabw,tabk, gracz);        //tutaj wiemy w jakich kierunkach jakie sa mozliwosci
+        jestRuch = czyMozliwyRuch(tab2);
+        if(poprawne)
+        {
+            if(jestRuch)
+            {
+                break;       //poprawne dane i jest ruch
+            }
+            else
+            {
+                cout <<endl<< "wybrany pionek nie moze sie ruszyc" << endl;
+                czekajNaEnter();
+            }
+        }
+        else
+        {
+            cout<<endl<< "zle dane, podaj ponownie: " << endl;
+            czekajNaEnter();
+        }
+    }
+}
+
+void menuPionek(char plansza[17][17], int tab2[3][3], int gracz,int tabw, int tabk) //mozliwosc zmiany pionka
+{
+    czyszczenieKonsoli();
+    rysujNaglowek();
+    char wybor;
+    rysujPlansze(plansza,gracz);
+    cout << "  M E N U" << endl << "  1. wybierz gdzie chcesz ruszyc" << endl << "  2. wybierz inny pionek" << endl << endl;
+    cout << " twoj wybor: ";
+    cin >> wybor;
+    czyszczenieKonsoli();
+    switch(wybor)
+    {
+        case '1':
+        {
+            break;
+        }
+        case '2':
+        {
+            wybraniePionka(plansza,tab2, gracz, tabw, tabk);
+            menuPionek(plansza,tab2,gracz, tabw, tabk);
+            break;
+        }
+        default:
+        {
+            cout << "zly wybor, wybierz ponownie" << endl;
+            menuPionek(plansza, tab2, gracz, tabw, tabk);
+        }
+    }
+}
+
+bool czyDobryKierunek(int tab[3][3], string kierunek) //sprawdzenie czy w danym kierunku dostepne jest bicie
 {
     if(((kierunek=="NW")||(kierunek=="nw")||(kierunek=="Nw")||(kierunek=="nW"))&&(tab[0][0]==1)) return 1;
     if(((kierunek=="N")||(kierunek=="n"))&&((tab[0][1]==1)||(tab[0][1]==3))) return 1;
@@ -646,7 +662,7 @@ void wykonanieRuchu(char tab[17][17], int tab2[3][3], int tabw, int tabk, int gr
         cin >> kier;
         poprawne=czyDobryKierunek(tab2,kier);
         if(poprawne)
-        {
+        {https://cleant.it/pages/animalpack_zebra
             break;
         }
         else
@@ -655,7 +671,7 @@ void wykonanieRuchu(char tab[17][17], int tab2[3][3], int tabw, int tabk, int gr
         }
     }
     posuniece(tab,tabw,tabk,kier);
-    system("cls");
+    czyszczenieKonsoli();
     rysujPlansze(tab,gracz);
 
 }
@@ -731,7 +747,7 @@ void czyZablokowany(char tab[17][17], string g1, string g2, bool &koniec)
                 ruch=false;
                 gdzieMoznaRuszyc(tab,tab2,i,j,gracz);
                 ruch=czyMozliwyRuch(tab2);
-                if(ruch)https://www.youtube.com/playlist?list=PLjHmWifVUNMKIGHmaGPVqSD-L6i1Zw-MH
+                if(ruch)
                 {
                     kolka = true;
                 }
@@ -783,13 +799,9 @@ int main()
     gra warcaby;
     bool byloBicie=false;
 
-    //HANDLE konsola;
-    //konsola =GetStdHandle(STD_OUTPUT_HANDLE);
-    //SetConsoleTextAttribute(konsola, FOREGROUND_BLUE | BACKGROUND_GREEN);
-
     rysujNaglowek();
     nazwanieGraczy(warcaby.gr1,warcaby.gr2);
-    system("cls");
+    czyszczenieKonsoli();
     podstawoweMenu(warcaby.koniecGry);
 
     while(!warcaby.koniecGry) //glowna petla gry
