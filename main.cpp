@@ -6,17 +6,17 @@
 
 using namespace std;
 
-void czyszczenieKonsoli()
+void czyszczenieKonsoli() // function that clears console
 {
     system("cls");
 }
 
-void czekajNaEnter()
+void czekajNaEnter() // function that waits for user to press ENTER
 {
     system("pause");
 }
 
-void rysujPlansze(char tab[17][17], int gracz)
+void rysujPlansze(char tab[17][17], int gracz) //funtion that draws game board
 {
     char indeksy[17] = {'I',' ','H',' ','G',' ','F',' ','E',' ','D',' ','C',' ','B',' ','A'};
     cout << setw(3) << "1" << setw(2) << "2" << setw(2) << "3" << setw(2) << "4" << setw(2) << "5" << setw(2) << "6" << setw(2) << "7" << setw(2) << "8" << setw(2) << "9" << endl;
@@ -62,7 +62,7 @@ void rysujPlansze(char tab[17][17], int gracz)
     cout << endl;
 }
 
-void nazwanieGraczy(string &jeden, string &dwa)
+void nazwanieGraczy(string &jeden, string &dwa) //funtion that allows user to name players
 {
     cout << "podaj nazwe gracza 1: ";
     getline(cin,jeden);
@@ -71,13 +71,13 @@ void nazwanieGraczy(string &jeden, string &dwa)
     cout << endl;
 }
 
-void rysujNaglowek() //function that draw headline
+void rysujNaglowek() //function that draws headline
 {
     cout << " W A R C A B Y   K R Z Y Z O W E" << endl;
     cout << setw(32) << "by: Lukasz Kaminski" << endl << endl;
 }
 
-void rysujPomoc()
+void rysujPomoc() //function that draws help
 {
     cout << "> Gracze poruszaja sie na zmiane," << endl;
     cout << "> W jednej turze gracz musi poruszyc sie jedna figura," << endl;
@@ -103,7 +103,7 @@ void rysujPomoc()
     cout << "nacisnij ENTER, aby zamknac" << endl << endl;
 }
 
-void podstawoweMenu(bool &koniec)
+void podstawoweMenu(bool &koniec) //function that draws game menu
 {
     rysujNaglowek();
     char wybor;
@@ -140,7 +140,7 @@ void podstawoweMenu(bool &koniec)
     }
 }
 
-void pokazKtoRusza(int gracz, string g1, string g2)
+void pokazKtoRusza(int gracz, string g1, string g2) //function that shows which player move then pawn
 {
     czyszczenieKonsoli();
     rysujNaglowek();
@@ -158,7 +158,7 @@ void pokazKtoRusza(int gracz, string g1, string g2)
     czekajNaEnter();
 }
 
-void zerowanie(int tab[3][3]) //zerowanie pol malej tablicy
+void zerowanie(int tab[3][3]) //zerowanie pol malej tablicy // funtion that puts zeros in small matrix
 {
     for(int i=0;i<3;i++)
     {
@@ -170,7 +170,8 @@ void zerowanie(int tab[3][3]) //zerowanie pol malej tablicy
     }
 }
 
-void gdzieMoznaRuszyc(char tab[17][17], int tab2[3][3], int w, int k, int gracz) //dla danego pola sprawdza mo¿liwoœci ruchu dooko³a niego 0-nie ma ruchu, 1-ruch, 2-bicie, dlugi ruch
+void gdzieMoznaRuszyc(char tab[17][17], int tab2[3][3], int w, int k, int gracz) //dla danego pola sprawdza mo¿liwoœci ruchu dooko³a niego 0-nie ma ruchu, 1-ruch, 2-bicie, dlugi ruch 
+// function that shows possible moves, 0 - no possible move, 1 - possible move, 2 - capture
 {
     char prz; //pionek przeciwnika
     char grcz; //pionek aktualnego gracza
@@ -298,7 +299,7 @@ void gdzieMoznaRuszyc(char tab[17][17], int tab2[3][3], int w, int k, int gracz)
     }
 }
 
-string tabNaKiedunek(int tab[3][3]) //zwraca kierunek, w ktorym mozliwe jest bicice
+string tabNaKiedunek(int tab[3][3]) //zwraca kierunek, w ktorym mozliwe jest bicice //funtion that shows where capture is possible
 {
     for(int i = 0;i<3;i++)
     {
@@ -319,7 +320,7 @@ string tabNaKiedunek(int tab[3][3]) //zwraca kierunek, w ktorym mozliwe jest bic
     }
 }
 
-char CyferkaNaLiterke(int lit) //zamienia cyfre na litere, ktora jest uzywana do oznaczenia pola na planszy
+char CyferkaNaLiterke(int lit) //zamienia cyfre na litere, ktora jest uzywana do oznaczenia pola na planszy // function that translate a digit to a letter, which is used to identify squares on board
 {
     if (lit == 0) return 'I';
     if (lit == 1) return 'H';
@@ -331,7 +332,7 @@ char CyferkaNaLiterke(int lit) //zamienia cyfre na litere, ktora jest uzywana do
     if (lit == 7) return 'B';
     if (lit == 8) return 'A';
 }
-void bicie(char tab[17][17], int w, int k, string kier) // wykonanie bicia w danym kierunku
+void bicie(char tab[17][17], int w, int k, string kier) // wykonanie bicia w danym kierunku // function that does capture in given direction
 {
     if(kier=="NW")
     {
@@ -383,7 +384,7 @@ void bicie(char tab[17][17], int w, int k, string kier) // wykonanie bicia w dan
     }
 }
 
-void czyMozliweBicie(char tab[17][17],int tab2[3][3], int gracz, bool &zbito) //sprawdza czy mozliwe bicie, jesli tak to je wykonuje
+void czyMozliweBicie(char tab[17][17],int tab2[3][3], int gracz, bool &zbito) //sprawdza czy mozliwe bicie, jesli tak to je wykonuje // function that checks if capture is possible and does capture
 {
     int bicieW, bicieK;
     bool czyBicie=false;
@@ -397,7 +398,7 @@ void czyMozliweBicie(char tab[17][17],int tab2[3][3], int gracz, bool &zbito) //
                 {
                     for(int y=0;y<3;y++)
                     {
-                        if(tab2[k][y]==2) //czy mozliwe bicie
+                        if(tab2[k][y]==2) //czy mozliwe bicie // is capture possible
                         {
                             czyBicie=true;
                             bicieW = i;
@@ -411,7 +412,7 @@ void czyMozliweBicie(char tab[17][17],int tab2[3][3], int gracz, bool &zbito) //
                 }
             }
         }
-    if(czyBicie) //wykonanie bicia
+    if(czyBicie) //wykonanie bicia // capture
     {
         string kierunek = tabNaKiedunek(tab2);
         czyszczenieKonsoli();
@@ -428,7 +429,7 @@ void czyMozliweBicie(char tab[17][17],int tab2[3][3], int gracz, bool &zbito) //
     }
 }
 
-void podanieWartosci(char &cliterka, int &cyferka) //zwraca literke i cyferke
+void podanieWartosci(char &cliterka, int &cyferka) //zwraca literke i cyferke // function where user give square identifires - letter abd digit
 {
     cout << "literka: ";
     cin >> cliterka;
@@ -437,7 +438,7 @@ void podanieWartosci(char &cliterka, int &cyferka) //zwraca literke i cyferke
     cin >> cyferka;
 }
 
-void literkaNaCyferke(char clit, int &lit) //zamiana literki cyferke
+void literkaNaCyferke(char clit, int &lit) //zamiana literki cyferke // function that translates letter to digit
 {
     if(clit=='I') lit = 0;
     if(clit=='H') lit = 1;
@@ -450,13 +451,13 @@ void literkaNaCyferke(char clit, int &lit) //zamiana literki cyferke
     if(clit=='A') lit = 8;
 }
 
-void wyborNaIndeks(int lit, int cyf, int &w, int &k) //zamienia podane wartosci na indeksy tabeli
+void wyborNaIndeks(int lit, int cyf, int &w, int &k) //zamienia podane wartosci na indeksy tabeli // function that translates given values to matrix indexes
 {
     w = lit*2;
     k = (cyf-1)*2;
 }
 
-void wyborPionka(int &w, int &k) //wybranie pionka za pomoca literki i cyferki, zwraca indeksy planszy
+void wyborPionka(int &w, int &k) //wybranie pionka za pomoca literki i cyferki, zwraca indeksy planszy // funtion that is used to choose pawn by giving letter and digit
 {
     char clit;
     int lit,cyf;
@@ -465,7 +466,7 @@ void wyborPionka(int &w, int &k) //wybranie pionka za pomoca literki i cyferki, 
     wyborNaIndeks(lit,cyf,w,k);
 }
 
-bool poprawneDane(char tab[17][17], int w, int k, int gracz) //sprawdzanie czy gracz wybral swoj pionek, a nie jakies inne pole na planszy
+bool poprawneDane(char tab[17][17], int w, int k, int gracz) //sprawdzanie czy gracz wybral swoj pionek, a nie jakies inne pole na planszy //function that checks if player choosed his pawn, not the other square on board
 {
     if(((gracz == 1) && (tab[w][k] == 'x'))||((gracz == -1) &&(tab[w][k] == 'o')))
     {
@@ -495,7 +496,7 @@ bool czyMozliwyRuch(int tab[3][3])
 
 }
 
-void wybraniePionka(char tab[17][17], int tab2[3][3], int gracz, int &tabw, int &tabk)
+void wybraniePionka(char tab[17][17], int tab2[3][3], int gracz, int &tabw, int &tabk) // function used to choosing pawn
 {
     bool poprawne, jestRuch;
     while(1)     //wybor i sprawdzanie poprawnosci wyboru
@@ -529,7 +530,7 @@ void wybraniePionka(char tab[17][17], int tab2[3][3], int gracz, int &tabw, int 
     }
 }
 
-void menuPionek(char plansza[17][17], int tab2[3][3], int gracz,int tabw, int tabk) //mozliwosc zmiany pionka
+void menuPionek(char plansza[17][17], int tab2[3][3], int gracz,int tabw, int tabk) //mozliwosc zmiany pionka // function thats allow player to choose another pawn or move choosen one
 {
     czyszczenieKonsoli();
     rysujNaglowek();
@@ -559,7 +560,7 @@ void menuPionek(char plansza[17][17], int tab2[3][3], int gracz,int tabw, int ta
     }
 }
 
-bool czyDobryKierunek(int tab[3][3], string kierunek) //sprawdzenie czy w danym kierunku dostepne jest bicie
+bool czyDobryKierunek(int tab[3][3], string kierunek) //sprawdzenie czy w danym kierunku dostepne jest bicie // function that checks if there is possible capture in all directions
 {
     if(((kierunek=="NW")||(kierunek=="nw")||(kierunek=="Nw")||(kierunek=="nW"))&&(tab[0][0]==1)) return 1;
     if(((kierunek=="N")||(kierunek=="n"))&&((tab[0][1]==1)||(tab[0][1]==3))) return 1;
@@ -572,7 +573,7 @@ bool czyDobryKierunek(int tab[3][3], string kierunek) //sprawdzenie czy w danym 
     else  return 0;
 }
 
-void posuniece(char tab[17][17],int w, int k, string kier)
+void posuniece(char tab[17][17],int w, int k, string kier) // pawn move
 {
     if((kier=="NW")||(kier=="nw")||(kier=="Nw")||(kier=="nW"))
     {
@@ -649,7 +650,7 @@ void posuniece(char tab[17][17],int w, int k, string kier)
     }
 }
 
-void wykonanieRuchu(char tab[17][17], int tab2[3][3], int tabw, int tabk, int gracz)
+void wykonanieRuchu(char tab[17][17], int tab2[3][3], int tabw, int tabk, int gracz) // pawn move
 {
     bool poprawne;
     string kier;
@@ -676,7 +677,7 @@ void wykonanieRuchu(char tab[17][17], int tab2[3][3], int tabw, int tabk, int gr
 
 }
 
-void czyPionekNaKoncu(char tab[17][17], string g1, string g2, bool &koniec)
+void czyPionekNaKoncu(char tab[17][17], string g1, string g2, bool &koniec) // function that checks if pawn is on the end of the board
 {
     if((tab[0][4]=='o')||(tab[0][8]=='o')||(tab[0][12]=='o'))
     {
@@ -690,7 +691,7 @@ void czyPionekNaKoncu(char tab[17][17], string g1, string g2, bool &koniec)
     }
 }
 
-void czyZbitePionki(char tab[17][17], string g1, string g2, bool &koniec)
+void czyZbitePionki(char tab[17][17], string g1, string g2, bool &koniec) // function that checks if one of the players has captured all enemy pawns
 {
     int iksy=0;
     int kolka=0;
@@ -717,7 +718,7 @@ void czyZbitePionki(char tab[17][17], string g1, string g2, bool &koniec)
 
 }
 
-void czyZablokowany(char tab[17][17], string g1, string g2, bool &koniec)
+void czyZablokowany(char tab[17][17], string g1, string g2, bool &koniec) // function that checks if there is no possible move
 {
     int gracz;
     bool iksy=false;
@@ -772,7 +773,7 @@ int main()
 {
     struct gra
     {
-        char plansza[17][17] =  {{' ',' ',' ',' ','x','-','-','-','x','-','-','-','x',' ',' ',' ',' '},
+        char plansza[17][17] =  {{' ',' ',' ',' ','x','-','-','-','x','-','-','-','x',' ',' ',' ',' '}, //game board
                                 {' ',' ',' ',' ',' ','\\',' ',' ','|',' ',' ','/',' ',' ',' ',' ',' '},
                                 {' ',' ',' ',' ',' ',' ','x','-','x','-','x',' ',' ',' ',' ',' ',' '},
                                 {' ',' ',' ',' ',' ',' ',' ','\\','|','/',' ',' ',' ',' ',' ',' ',' '},
@@ -804,7 +805,7 @@ int main()
     czyszczenieKonsoli();
     podstawoweMenu(warcaby.koniecGry);
 
-    while(!warcaby.koniecGry) //glowna petla gry
+    while(!warcaby.koniecGry) //glowna petla gry // main game loop
     {
         int w, k;
         byloBicie=false;
