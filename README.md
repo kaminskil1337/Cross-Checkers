@@ -75,4 +75,4 @@ A     o---o---o
 ## Project status
 ### unfinished
 TO DO:
-* vtranslate code to english,
+* translate code to english,
