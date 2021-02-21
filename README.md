@@ -1,6 +1,6 @@
 ## Table of contents
 * [General info](#general-info)
-* [Course of the game] (#course-of-the-game)
+* [Course of the game](#course-of-the-game)
 * [Technologies](#technologies) 
 
 
@@ -25,8 +25,9 @@ Program features:
 * automaticly check possible capture and force it,
 * automaticly check win condiion,
 * have friendly user interface,
-```
+
 Game board:
+```
   1 2 3 4 5 6 7 8 9
 I     x---x---x     I
        \  |  /
@@ -51,7 +52,7 @@ A     o---o---o
 ## Course of the game
 
 #### When we launch a game, it asks us to give players name
-![player names](./img/player names.png?raw=true "player names")
+![player names](/img/playernames.png)
 
 ## Technologies
 Project is created with:
