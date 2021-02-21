@@ -25,7 +25,7 @@ Program features:
 * automaticly check possible capture and force it,
 * automaticly check win condiion,
 * have friendly user interface,
-
+```
 Game board:
   1 2 3 4 5 6 7 8 9
 I     x---x---x     I
@@ -46,11 +46,12 @@ B       o-o-o       B
        /  |  \ 
 A     o---o---o
   1 2 3 4 5 6 7 8 9	   
+```
 
 ## Course of the game
 
 #### When we launch a game, it asks us to give players name
-![player names](./img/player names.png)
+![player names](./img/player names.png?raw=true "player names")
 
 ## Technologies
 Project is created with:
