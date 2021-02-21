@@ -1,13 +1,11 @@
 ## Table of contents
 * [General info](#general-info)
+* [Course of the game] (#course-of-the-game)
 * [Technologies](#technologies) 
 
 
 ## General info
-This is my university project, my task was to do cross checkers board game in command window.
-
-### Task from university
-```
+This program is a command window game - cross checkers.
 Cross checkers board game is made for two players.
 There is 49 squares on the board, 16 figures 'o' and 16 figures 'x'.
 Players move in turns, player with 'x' figures begins.
@@ -20,10 +18,11 @@ After the capture, captured figure is taken out of the board. Capture is forced.
 Player wins if his enemy can't do any move or if he capture all enemy figures.
 Also player wins if he reach opposite end of the board with his figure.
 
-Program should:
+Program features:
 * allow two people play the game,
 * show help (game descripion and game rules),
-* allow figures to move, force captures,
+* allow figures to move,
+* automaticly check possible capture and force it,
 * automaticly check win condiion,
 * have friendly user interface,
 
@@ -47,7 +46,11 @@ B       o-o-o       B
        /  |  \ 
 A     o---o---o
   1 2 3 4 5 6 7 8 9	   
-```
+
+## Course of the game
+
+#### When we launch a game, it asks us to give players name
+![player names](./img/player names.png)
 
 ## Technologies
 Project is created with:
