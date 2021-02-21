@@ -74,5 +74,5 @@ A     o---o---o
 
 ## Project status
 ### unfinished
-#### TO DO:
+ TO DO:
 *translate code to english,
