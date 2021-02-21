@@ -51,7 +51,7 @@ A     o---o---o
 ## Course of the game
 
 #### When we launch a game, it asks us to give players name
-![player names](./img/player names.png?raw=true "player names")
+![player names](/img/player names.png?raw=true "player names")
 
 ## Technologies
 Project is created with:
