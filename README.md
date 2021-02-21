@@ -77,7 +77,7 @@ A     o---o---o
 
 
 #### When there is possible capture for player, program detect it, and force player to do it by pressing ENTER
-![forcecapture](/img/forcecapture.png)
+![forcedcapture](/img/forcedcapture.png)
 
 #### Game ends when program detects one of the winning condition.
 
