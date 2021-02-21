@@ -52,11 +52,34 @@ A     o---o---o
 ## Course of the game
 
 #### When we launch a game, it asks us to give players name
-<<<<<<< HEAD
 ![player names](/img/playernames.png)
-=======
-![player names](/img/player names.png?raw=true "player names")
->>>>>>> d682f71ee76d86e5a9cebc37c59ac000dd1fad5a
+
+#### After giving players name's program shows us menu, where we can choose
+#### 1 - play, 2 - help, 3 - exit
+![menu](/img/menu.png)
+
+#### Help option describes game rules and how to play the game
+![help](/img/help.png)
+
+#### Play option launches game, turn indicator appears on screen
+![turnindication](/img/turnindication.png)
+
+#### After pressing ENTER game board appears on screen,
+#### on the right there are turn indicator and wind rose.
+#### Player is requested to choose figure by giving it coordinates
+![figurepick](/img/figurepick.png)
+
+#### After picking figure player has to options, to move choosen figure or pick another one
+![figuredecision](/img/figuredecision.png)
+
+#### When we decide to move choosen figure, we are asked about in which direction we want to move
+![wheretomove](/img/wheretomove.png)
+
+
+#### When there is possible capture for player, program detect it, and force player to do it by pressing ENTER
+![forcecapture](/img/forcecapture.png)
+
+#### Game ends when program detects one of the winning condition.
 
 ## Technologies
 Project is created with:
