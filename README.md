@@ -1,6 +1,6 @@
 ## Table of contents
 * [General info](#general-info)
-* [Course of the game] (#course-of-the-game)
+* [Course of the game](#course-of-the-game)
 * [Technologies](#technologies) 
 
 
